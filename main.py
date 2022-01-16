@@ -1,16 +1,22 @@
-# This is a sample Python script.
+# This code will implement a simple Binary PAM mod/demod
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import numpy as np
 
+#Constants
+N = 12 #Samples per symbol
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+#Generate a vector of random bits
+Bits_in = np.random.randint(0, 2, (10, 1))
 
+#Convert to Symbols
+Symbols_in = (Bits_in*2-1)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+#Define the Pulse Shape, Let's go with NRZ
+p = np.ones((N,1))
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+#Upsample the Symbols Vector
+delta_train = np.zeros((Symbols_in.size*N,1))
+delta_train[0:N:] = Symbols_in
+
+print(delta_train)
+
